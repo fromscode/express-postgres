@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "predev": "node --env-file=.env db/populatedb.js",
     "dev": "node --watch --env-file=.env app.js"
   },
   "keywords": [],
