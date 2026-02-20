@@ -1,5 +1,8 @@
-exports.getHome = (_, res, next) => {
-    res.render("index");
+const db = require("../db/queries");
+
+exports.getHome = async (_, res) => {
+    const usernames = await db.getAllUsernames();
+    res.render("index", { usernames: usernames });
 };
 
 exports.getNew = (_, res) => {
@@ -14,7 +17,7 @@ exports.postNew = [
         .notEmpty()
         .withMessage("Username cannot be empty")
         .escape(),
-    (req, res) => {
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             res.status(400).render("new", {
@@ -22,7 +25,7 @@ exports.postNew = [
             });
         } else {
             const { username } = matchedData(req);
-            console.log(`Username to be saved: ${username}`);
+            await db.insertUsername(username);
             res.redirect("/");
         }
     },

@@ -6,7 +6,12 @@
     <title>Home Page</title>
 </head>
 <body>
-    Usernames will be logged here - WIP
+    <h1>Usernames: </h1>
+    <ol>
+        <% usernames.forEach(username => { %>
+            <li><%= username.username %></li>
+        <% }) %>
+    </ol>
     <div>
         <a href="/new">Add a user</a>
     </div>
