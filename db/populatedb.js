@@ -15,16 +15,12 @@ VALUES
   ('Damon');
 `;
 
-const host = process.env.host;
-const user = process.env.user;
-const database = process.env.database;
-const password = process.env.password;
-const port = process.env.db_port;
+const uri = process.env.db_uri;
 
 async function main() {
     console.log("seeding...");
     const client = new Client({
-        connectionString: `postgresql://${user}:${password}@${host}:${port}/${database}`,
+        connectionString: uri,
     });
     await client.connect();
     try {
