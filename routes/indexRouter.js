@@ -11,4 +11,6 @@ router.post("/new", controller.postNew);
 
 router.get('/search{*splat}', controller.getSearch)
 
+router.post('/delete', controller.deleteAllUsers)
+
 module.exports = router;
