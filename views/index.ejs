@@ -6,6 +6,11 @@
     <title>Home Page</title>
 </head>
 <body>
+    <form action="/search" method="get">
+        <input type="text" placeholder="Enter name to search" name="param">
+        <button type="submit">Search</button>
+    </form>
+    <%- include('validationErrors') %>
     <h1>Usernames: </h1>
     <ol>
         <% usernames.forEach(username => { %>

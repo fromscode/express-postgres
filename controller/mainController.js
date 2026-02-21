@@ -9,7 +9,7 @@ exports.getNew = (_, res) => {
     res.render("new");
 };
 
-const { body, validationResult, matchedData } = require("express-validator");
+const { body, validationResult, matchedData, query } = require("express-validator");
 
 exports.postNew = [
     body("username")
@@ -30,3 +30,20 @@ exports.postNew = [
         }
     },
 ];
+
+exports.getSearch = [
+    query('param')
+        .notEmpty().withMessage('Search field cannot be empty')
+        .escape(),
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).render('search', { errors: errors.array(), results: [] })
+        }
+        else {
+            const { param } = req.query;
+            const rows = await db.searchUser(param);
+            res.render('search', { results: rows });
+        }
+    }
+]

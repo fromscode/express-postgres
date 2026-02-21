@@ -9,4 +9,6 @@ router.get("/new", controller.getNew);
 
 router.post("/new", controller.postNew);
 
+router.get('/search{*splat}', controller.getSearch)
+
 module.exports = router;
